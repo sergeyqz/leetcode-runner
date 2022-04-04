@@ -1,0 +1,33 @@
+A script I'm using to solve problems on Leetcode in Python 3. It doesn't support any other language.
+
+1. ~mkdir yourname~ in the directory.
+2. Run ~bash ./watch.sh yourname~
+3. Add files ~problem.py~ and ~problem.testcases~ in the ~yourname~ directory.
+4. Copy-paste example testcases from Leetcode problem description as is into the ~problem.testcases~ file.
+5. Copy-paste a solution stub from Leetcode to ~problem.py~ and write your code.
+6. Save file, and the runner will execute it and print any errors or simply ~OK~ if everything is correct.
+
+I name my files like this: ~31-next-permutation.py~ and ~31-next-permutation.testcases~.
+
+You can add a ~def check_tle()~ to the solution file. I use it to generate large random examples to check if I'd get a Time Limit Exceeded error on Leetcode. The limit is 5 seconds and you can change it in ~watch.sh~ file.
+
+The ~runner.py~ file doesn't have any external dependencies. But ~watch.sh~ uses ~inotifywait~, which on NixOS is included in the package named ~inotify-tools~. It also uses ~systemd-run~ command to enforce the time limit. So if you use a system without systemd, you'd need to change that part in the script.
+
+The script doesn't support interactive problems yet, where you need to implement a class with several methods.
+
+The format of test cases in a ~.testcases~ file is exactly like on Leetcode:
+
+#+begin_export ascii
+Input: s = "abcacb", p = "ab", removable = [3,1,0]
+Output: 2
+#+end_export
+
+So as said earlier, you just copy-paste all examples from Leetcode in a ~.testcases~ file and add your own cases in the same format.
+
+I don't have a premium account on Leetcode, and to hide paywalled problems from the list of problems on Leetcode I run this JS snippet:
+
+#+begin_src javascript
+$$('span[data-original-title="Subscribe to unlock"]').forEach(s => {
+    s.parentElement.parentElement.parentElement.parentElement.style.display = 'none'
+})
+#+end_src
